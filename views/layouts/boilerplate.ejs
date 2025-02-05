@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheet/main.css">
+    <script src="/javascript/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/annyang@2.6.1/dist/annyang.min.js"></script>
+    <script src="/javascript/annyang.js"></script>
+</head>
+<body class=" d-flex flex-column vh-100">
+    <div class="cover-container d-flex w-100 h-100 py-3 mx-auto flex-column">
+        <%- include('../partials/navbar')%>
+        <main class="container mt-5">
+            <%-body%>
+        </main>
+    </div>
+    <script>
+        // document.querySelector('.img__btn').addEventListener('click', function() {
+        //     document.querySelector('.cont').classList.toggle('s--signup');
+        // });
+        document.addEventListener("DOMContentLoaded", function () {
+            const path = window.location.pathname;
+            const cont = document.querySelector(".cont"); 
+            const toggleButton = document.querySelector(".img__btn");
+
+    // Show correct form based on URL
+            if (path === "/register") {
+                cont.classList.add("s--signup");
+            } else {
+                cont.classList.remove("s--signup");
+            }
+
+    // Toggle on button click and update URL
+            toggleButton.addEventListener("click", function () {
+                cont.classList.toggle("s--signup");
+                
+                if (cont.classList.contains("s--signup")) {
+                    history.pushState({}, "", "/register"); // Change URL to /register
+                } else {
+                    history.pushState({}, "", "/login"); // Change URL to /login
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    });
+    </script>
+</body>
+</html>

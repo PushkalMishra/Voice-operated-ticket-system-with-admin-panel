@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheet/details.css">
+<div class="container">
+    <h2>Train Schedule</h2>
+    <h5>Date of Journey: <%= date %></h5>
+    <% if (trains.length > 0) { %>
+        <table class="table table-bordered table-hover mt-4">
+            <thead class="table-primary">
+                <tr>
+                    <th>Train Number</th>
+                    <th>Train Name</th>
+                    <th>From</th>
+                    <th>Departure</th>
+                    <th>To</th>
+                    <th>Arrival</th>
+                    <th>Duration</th>
+                    <th>Class</th>
+                    <th>Distance (km)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trains.forEach(train => { %>
+                    <tr>
+                        <td><%= train.properties.number %></td>
+                        <td><%= train.properties.name %></td>
+                        <td><%= train.properties.from_station_name %></td>
+                        <td><%= train.properties.departure %></td>
+                        <td><%= train.properties.to_station_name %></td>
+                        <td><%= train.properties.arrival %></td>
+                        <td><%= train.properties.duration_h %>h <%= train.properties.duration_m %>m</td>
+                        <td><%= train.properties.classes || 'N/A' %></td>
+                        <td><%= train.properties.distance %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p class="no-trains-message">No trains found for the selected route and date.</p>
+    <% } %>
+</div>

@@ -1,0 +1,60 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheet/book.css">
+<div class="container">
+    <h2>Book Your Ticket</h2>
+
+    <form action="/book" method="POST">
+        <div class="form-group row">
+            <label for="from" class="col-sm-2 col-form-label">From</label>
+            <div class="col-sm-10">
+                <select id="from" name="from" class="form-select" required>
+                    <option selected disabled>Select Starting Station</option>
+                    <option value="BHOPAL JN">BHOPAL JN</option>
+                    <option value="INDORE JN">INDORE JN</option>
+                    <option value="JABALPUR">JABALPUR</option>
+                    <!-- Add other station options as needed -->
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group row mt-3">
+            <label for="to" class="col-sm-2 col-form-label">To</label>
+            <div class="col-sm-10">
+                <select id="to" name="to" class="form-select" required>
+                    <option selected disabled>Select Destination Station</option>
+                    <option value="BHOPAL JN">BHOPAL JN</option>
+                    <option value="INDORE JN">INDORE JN</option>
+                    <option value="JABALPUR">JABALPUR</option>
+                    <!-- Add other station options as needed -->
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group row mt-3">
+            <label for="date" class="col-sm-2 col-form-label">Date of Travel</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="date" name="date" required>
+            </div>
+        </div>
+
+        <div class="form-group row mt-3">
+            <label for="preference" class="col-sm-2 col-form-label">Class Preference</label>
+            <div class="col-sm-10">
+                <select id="preference" name="preference" class="form-select">
+                    <option value="">All Classes</option>
+                    <option value="1A">First AC (1A)</option>
+                    <option value="2A">Second AC (2A)</option>
+                    <option value="3A">Third AC (3A)</option>
+                    <option value="SL">Sleeper (SL)</option>
+                    <option value="CC">Chair Car (CC)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row mt-4">
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary">Search Trains</button>
+            </div>
+        </div>
+    </form>
+</div>

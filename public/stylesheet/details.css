@@ -1,0 +1,29 @@
+.container {
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+h2, h5 {
+    color: #343a40;
+    text-align: center;
+}
+
+.table {
+    text-align: center;
+}
+
+.table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.no-trains-message {
+    margin-top: 30px;
+    text-align: center;
+    color: #dc3545;
+    font-size: 1.2em;
+}

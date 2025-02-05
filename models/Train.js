@@ -1,0 +1,79 @@
+const mongoose=require('mongoose');
+const Schema=mongoose.Schema;
+
+// Define the train schema
+// const trainSchema = Schema({
+//   geometry: {
+//     type: {
+//       type: String, 
+//       required: true,
+//     },
+//     coordinates: {
+//       type: [[Number]], 
+//       required: true,
+//     },
+//   },
+//   properties: {
+//     third_ac: { type: Number },
+//     arrival: { type: String },
+//     from_station_code: { type: String },
+//     name: { type: String },
+//     zone: { type: String },
+//     chair_car: { type: Number },
+//     first_class: { type: Number },
+//     duration_m: { type: Number },
+//     sleeper: { type: Number },
+//     from_station_name: { type: String },
+//     number: { type: String },
+//     departure: { type: String },
+//     return_train: { type: String },
+//     to_station_code: { type: String },
+//     second_ac: { type: Number },
+//     classes: { type: String },
+//     to_station_name: { type: String },
+//     duration_h: { type: Number },
+//     type: { type: String },
+//     first_ac: { type: Number },
+//     distance: { type: Number },
+//   }
+// });
+
+// Train Model
+
+const trainSchema = new Schema({
+  trainNumber: { type: Number, 
+    required: true, 
+    unique: true 
+  },
+  name: { 
+    type: String, 
+    required: true 
+  },
+  route: [{ 
+    station: String, 
+    arrival: String, 
+    departure: String 
+  }],
+  availableSeats: {
+      sleeper: { 
+        type: Number, 
+        default: 0 
+      },
+      ac: { 
+        type: Number, 
+        default: 0 
+      },
+      general: { 
+        type: Number, 
+        default: 0 
+      }
+  },
+  fare: {
+      sleeper: Number,
+      ac: Number,
+      general: Number
+  },
+  status: { type: String, default: "Running" } // Running, Cancelled, Delayed
+});
+
+module.exports=mongoose.model('Train', trainSchema);
