@@ -1,56 +1,71 @@
 <% layout('layouts/boilerplate') %>
-<link rel="stylesheet" href="/stylesheet/login.css">
-<div class="cont">
-    <div class="form sign-in">
-      <h2>Welcome back!</h2>
-      <form id="loginForm" action="/login" method="POST">
-      <label for="username">
-        <span>Username</span>
-        <input id="username" class="form-control" name="username" type="text" required autofocus/>
-      </label>
-      <label for="password">
-        <span>Password</span>
-        <input id="password" class="form-control" name="password" type="text"/>
-      </label>
-      <p class="forgot-pass">Forgot password?</p>
-      <button type="submit" class="submit">Sign In</button>
-      <button type="submit" class="fb-btn">Connect with <span>Google</span></button>
-      </form>
+<link rel="stylesheet" href="/stylesheet/admin.css">
+<div class="container">
+  <h1 class="text-center mb-4">Add New Train</h1>
+  <div class="custom-form">
+    <div class="form">
+      <form action="/admin/new" method="POST">
+        <!-- Train Number -->
+        <div class="mb-3">
+            <label for="trainNumber" class="form-label">Train Number</label>
+            <input type="number" class="form-control" id="trainNumber" name="trainNumber" required>
+        </div>
+  
+        <!-- Train Name -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Train Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+  
+        <!-- Route -->
+        <div class="mb-3">
+            <label for="route" class="form-label">Route (JSON format)</label>
+            <textarea class="form-control" id="route" name="route" rows="3" required></textarea>
+            <small class="form-text text-muted">
+                Example: <code>{"station": ["Station A", "Station B", "Station C"]}</code>
+            </small>
+        </div>
+  
+        <!-- Available Seats -->
+        <div class="row mb-3">
+            <div class="col">
+                <label for="sleeper" class="form-label">Sleeper Seats</label>
+                <input type="number" class="form-control" id="sleeper" name="sleeper" required>
+            </div>
+            <div class="col">
+                <label for="ac" class="form-label">AC Seats</label>
+                <input type="number" class="form-control" id="ac" name="ac" required>
+            </div>
+            <div class="col">
+                <label for="general" class="form-label">General Seats</label>
+                <input type="number" class="form-control" id="general" name="general" required>
+            </div>
+        </div>
+  
+        <!-- Fare -->
+        <div class="row mb-3">
+            <div class="col">
+                <label for="sleeperFare" class="form-label">Sleeper Fare</label>
+                <input type="number" class="form-control" id="sleeperFare" name="sleeperFare" required>
+            </div>
+            <div class="col">
+                <label for="acFare" class="form-label">AC Fare</label>
+                <input type="number" class="form-control" id="acFare" name="acFare" required>
+            </div>
+            <div class="col">
+                <label for="generalFare" class="form-label">General Fare</label>
+                <input type="number" class="form-control" id="generalFare" name="generalFare" required>
+            </div>
+        </div>
+  
+        <!-- <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <input type="text" class="form-control" id="status" name="status" required>
+        </div> -->
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Add Train</button>
+    </form>
     </div>
-    <div class="sub-cont">
-      <div class="img">
-        <div class="img__text m--up">
-          <h2>New here?</h2>
-          <p>Sign up and get started on your journey of hassel free parking!</p>
-        </div>
-        <div class="img__text m--in">
-          <h2>One of us?</h2>
-          <p>If you already have an account, just sign in. We've missed you!</p>
-        </div>
-        <div class="img__btn">
-          <span class="m--up">Sign Up</span>
-          <span class="m--in">Sign In</span>
-        </div>
-      </div>
-      <div class="form sign-up">
-        <h2>Time to feel like home!</h2>
-        <form action="/register" method="POST" id="registerForm">
-        <label class="form-label" for="newusername">
-          <span>Name</span>
-          <input id="newusername" class="form-control" name="newusername" type="text" required/>
-        </label>
-        <label class="form-label" for="email">
-          <span>Email</span>
-          <input id="email" class="form-control" type="email" name="email"/>
-        </label>
-        <label class="form-label" for="newpassword">
-          <span>Password</span>
-          <input id="newpassword" class="form-control" name="newpassword" type="text"/>
-        </label>
-        <button type="submit" class="submit">Sign Up</button>
-        <button type="submit" class="fb-btn">Join with <span>Google</span></button>
-        </form>
-      </div>
-    </div>
+  </div>
 </div>
-

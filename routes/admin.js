@@ -22,10 +22,19 @@ router.post('/new', async (req, res) => {
 
         const t=await train.save();
         console.log(t)
-        // res.redirect('/admin/trains');
+        res.redirect('/admin/trains');
     } catch (err) {
         console.error("Error:", err.message);
         res.status(500).send("Error adding train: " + err.message);
+    }
+});
+router.get('/trains', async (req, res) => {
+    try {
+        const trains = await Train.find({}); // Fetch all trains from the database
+        res.render('admin/trains', { trains }); // Render the trains view
+    } catch (err) {
+        console.error("Error fetching trains:", err.message);
+        res.status(500).send("Error fetching trains: " + err.message);
     }
 });
 router.get('/:id/edit', async (req, res) => {

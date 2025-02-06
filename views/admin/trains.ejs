@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate') %>
+<!-- <link rel="stylesheet" href="/stylesheet/admin.css"> -->
+<div class="container mt-4">
+  <h1 class="text-center mb-4">All Trains</h1>
+  <div class="row">
+    <% trains.forEach(train => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <%= train.name %> (Train No: <%= train.trainNumber %>)
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+                Route: <%= train.route[0].station %> to <%= train.route[train.route.length - 1].station %>
+            </h5>
+            <p class="card-text">
+              <strong>Available Seats:</strong>
+              <div class="seat-box">
+                <span class="badge bg-primary">Sleeper: <%= train.availableSeats.sleeper %></span>
+                <span class="badge bg-success">AC: <%= train.availableSeats.ac %></span>
+                <span class="badge bg-warning">General: <%= train.availableSeats.general %></span>
+              </div>
+            </p>
+            <a href="/admin/<%= train._id %>/edit" class="btn btn-primary">Edit</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
