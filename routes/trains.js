@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     try {
         const trains = await Train.find({});
         console.log(trains)
-        // res.render('trains/index', { trains });
+        res.render('admin/trains', { trains,isAdmin: false});
     } catch (err) {
         console.error(err);
         res.status(500).send("Error fetching trains");
@@ -17,40 +17,43 @@ router.get('/', async (req, res) => {
 
 // POST: Search trains
 router.post('/search', async (req, res) => {
-    const { from, to, date } = req.body;
+    const { from, to,} = req.body;
     try {
         const trains = await Train.find({ "route.station": { $all: [from, to] } });
         console.log(trains)
-        // res.render('trains/searchResults', { trains, from, to, date });
+        res.render('admin/trains', { trains,isAdmin: false});
     } catch (err) {
         console.error(err);
         res.status(500).send("Error searching trains");
     }
 });
 
-// GET: Train details
-router.get('/:id', async (req, res) => {
+
+router.get('/search-train', async (req, res) => {
     try {
-        const train = await Train.findById(req.params.id);
+        const {trainNumber}=req.query
+        console.log(trainNumber)
+        const train = await Train.findOne({ trainNumber: Number(trainNumber)});
         if (!train) return res.status(404).send("Train not found");
-        res.render('trains/show', { train });
+        console.log(train)
+        res.render('admin/trains', { trains: [train],isAdmin: false});
     } catch (err) {
         console.error(err);
         res.status(500).send("Error fetching train details");
     }
 });
 
-// GET: Seat Availability
-router.get('/:id/availability', async (req, res) => {
+
+
+router.get('/:trainNumber/availability', async (req, res) => {
     try {
-        const train = await Train.findById(req.params.id);
+        const train = await Train.findOne({ trainNumber: req.params.trainNumber });
+        if (!train) return res.status(404).send("Train not found");
         res.json(train.availableSeats);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error checking seat availability");
     }
 });
-
-
 
 module.exports = router;

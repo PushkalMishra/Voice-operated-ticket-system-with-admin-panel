@@ -1,0 +1,26 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+body {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    background-color: rgba(3, 2, 29, 0.625)!important;
+}
+.custom-form {
+    width: 900px;
+    max-width: 100%;
+    border-radius: 10px;
+    margin: auto;
+    /* height: 550px; */
+    overflow: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    background-color: #fff;
+}
+.form {
+    width: 640px;
+    height: 100%;
+    padding: 50px 30px 0;
+  }

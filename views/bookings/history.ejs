@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate') %>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Booking History</h1>
+  <% if (bookings.length > 0) { %>
+    <div class="row">
+      <% bookings.forEach(booking => { %>
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">
+                Booking ID: <%= booking._id %>
+              </h5>
+            </div>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">
+                Train: <%= booking.train.name %> (Train No: <%= booking.train.trainNumber %>)
+              </h6>
+              <p class="card-text">
+                <strong>Seat Class:</strong> <%= booking.seatClass.toUpperCase() %>
+              </p>
+              <p class="card-text">
+                <strong>Date:</strong> <%= booking.date.toDateString() %>
+              </p>
+              <p class="card-text">
+                <strong>Fare:</strong> ₹<%= booking.fare %>
+              </p>
+              <p class="card-text">
+                <strong>Status:</strong> 
+                <span class="badge <%= booking.status === 'Booked' ? 'bg-success' : 'bg-warning' %>">
+                  <%= booking.status %>
+                </span>
+              </p>
+              <p class="card-text">
+                <strong>Booked On:</strong> <%= booking.createdAt.toLocaleString() %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="alert alert-info text-center">
+      You have no booking history.
+    </div>
+  <% } %>
+</div>

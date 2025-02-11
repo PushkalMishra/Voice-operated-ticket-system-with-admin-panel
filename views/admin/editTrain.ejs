@@ -1,0 +1,76 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheet/edit.css">
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Edit Train</h1>
+  <div class="custom-form">
+    <div class="form">
+      <form action="/admin/<%= train._id %>/edit" method="POST">
+        <!-- Train Number -->
+        <div class="mb-3">
+          <label for="trainNumber" class="form-label">Train Number</label>
+          <input type="number" class="form-control" id="trainNumber" name="trainNumber" value="<%= train.trainNumber %>" required>
+        </div>
+    
+        <!-- Train Name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Train Name</label>
+          <input type="text" class="form-control" id="name" name="name" value="<%= train.name %>" required>
+        </div>
+    
+        <!-- Route -->
+        <div class="mb-3">
+          <label for="route" class="form-label">Route (JSON format)</label>
+          <textarea class="form-control" id="route" name="route" rows="3" required><%= JSON.stringify(train.route) %></textarea>
+          <small class="form-text text-muted">
+            Example: <code>[{"station": "Station A", "arrival": "10:00", "departure": "10:05"}, {"station": "Station B", "arrival": "11:00", "departure": "11:05"}]</code>
+          </small>
+        </div>
+    
+        <!-- Available Seats -->
+        <div class="row mb-3">
+          <div class="col">
+            <label for="sleeper" class="form-label">Sleeper Seats</label>
+            <input type="number" class="form-control" id="sleeper" name="sleeper" value="<%= train.availableSeats.sleeper %>" required>
+          </div>
+          <div class="col">
+            <label for="ac" class="form-label">AC Seats</label>
+            <input type="number" class="form-control" id="ac" name="ac" value="<%= train.availableSeats.ac %>" required>
+          </div>
+          <div class="col">
+            <label for="general" class="form-label">General Seats</label>
+            <input type="number" class="form-control" id="general" name="general" value="<%= train.availableSeats.general %>" required>
+          </div>
+        </div>
+    
+        <!-- Fare -->
+        <div class="row mb-3">
+          <div class="col">
+            <label for="sleeperFare" class="form-label">Sleeper Fare</label>
+            <input type="number" class="form-control" id="sleeperFare" name="sleeperFare" value="<%= train.fare.sleeper %>" required>
+          </div>
+          <div class="col">
+            <label for="acFare" class="form-label">AC Fare</label>
+            <input type="number" class="form-control" id="acFare" name="acFare" value="<%= train.fare.ac %>" required>
+          </div>
+          <div class="col">
+            <label for="generalFare" class="form-label">General Fare</label>
+            <input type="number" class="form-control" id="generalFare" name="generalFare" value="<%= train.fare.general %>" required>
+          </div>
+        </div>
+    
+        <!-- Status -->
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select class="form-control" id="status" name="status" required>
+            <option value="Running" <%= train.status === 'Running' ? 'selected' : '' %>>Running</option>
+            <option value="Cancelled" <%= train.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+            <option value="Delayed" <%= train.status === 'Delayed' ? 'selected' : '' %>>Delayed</option>
+          </select>
+        </div>
+    
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update Train</button>
+      </form>
+    </div>
+  </div>
+</div>

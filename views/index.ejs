@@ -28,12 +28,43 @@
               </div>  
             </div>
         </nav>
-
-        <main class="px-3 mt-5">
-            <h1>RailINDIA</h1>
-            <p class="lead">Welcome to Indian Railway! <br> Jump right in and explore our many places.<br>Feel free to share some of your own and comment on others!</p>
-            <a href="./book" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Book</a>
-        </main>
+        <div class="container mt-5">
+          <div class="row d-flex align-items-center justify-content-between">
+            <div class="col-md-5">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h5 class="card-title">Search Trains</h5>
+                  <form action="trains/search" method="POST">
+                    <div class="mb-3">
+                      <label for="from" class="form-label">From Station</label>
+                      <input type="text" class="form-control" id="from" name="from" placeholder="Enter from station" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="to" class="form-label">To Station</label>
+                      <input type="text" class="form-control" id="to" name="to" placeholder="Enter to station" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Search by Route</button>
+                  </form>
+                  <hr>
+                  <form action="/trains/search-train" method="GET">
+                    <div class="mb-3">
+                      <label for="trainNumber" class="form-label">Train Number</label>
+                      <input type="number" class="form-control" id="trainNumber" name="trainNumber" placeholder="Enter train number" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary w-100">Search by Train Number</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <main class="px-3 mt-5">
+                <h1>RailINDIA</h1>
+                <p class="lead">Welcome to Indian Railway! <br> Jump right in and explore our many places.<br>Feel free to share some of your own and comment on others!</p>
+                <a href="./book" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Book</a>
+            </main>
+            </div>
+          </div>
+        </div>
     </div>
 </body>
 </html>

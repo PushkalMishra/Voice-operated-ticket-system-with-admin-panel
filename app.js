@@ -26,6 +26,7 @@ const trainRoutes = require('./routes/trains');
 const bookingRoutes=require('./routes/booking')
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/users');
+const methodOverride = require('method-override');
 const { isLoggedIn } = require('./middleware');
 const MongoDBStore = require("connect-mongo");
 const dbUrl = process.env.DB_URL;
@@ -49,6 +50,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(mongoSanitize({
     replaceWith: '_'
 }))
+app.use(methodOverride('_method'));
 app.use(flash());
 
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!'; 

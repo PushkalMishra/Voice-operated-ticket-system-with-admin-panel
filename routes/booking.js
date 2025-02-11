@@ -29,6 +29,7 @@ router.post('/:id/book',isLoggedIn,async (req, res) => {
         await train.save();
         await booking.save();
         console.log(booking)
+        console.log("booked")
         // req.flash("success", "Booking confirmed!");
         res.redirect('/bookings/history');
     } catch (err) {
