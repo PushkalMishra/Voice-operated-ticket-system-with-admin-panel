@@ -8,7 +8,6 @@ const router = express.Router();
 router.get('/',isLoggedIn, async (req, res) => {
     try {
         const trains = await Train.find({});
-        console.log(trains)
         res.render('admin/trains', { trains,isAdmin: res.locals.isAdmin});
     } catch (err) {
         console.error(err);
@@ -41,43 +40,12 @@ router.post('/search', async (req, res) => {
       } else {
         return res.status(400).send("Please provide valid search criteria (from-to stations or train number)");
       }
-  
-      console.log("Trains Found:", trains);
       res.render('admin/trains', { trains, isAdmin: false });
     } catch (err) {
       console.error(err);
       res.status(500).send("Error searching trains");
     }
   });
-// router.post('/search', async (req, res) => {
-//     const { from, to,} = req.body;
-//     try {
-//         const trains = await Train.find({ "route.station": { $all: [from, to] } });
-//         console.log(trains)
-//         res.render('admin/trains', { trains,isAdmin: false});
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send("Error searching trains");
-//     }
-// });
-
-
-// router.post('/search-train', async (req, res) => {
-//     try {
-//         const {trainNumber}=req.body
-//         console.log(trainNumber)
-//         const train = await Train.findOne({ trainNumber: Number(trainNumber)});
-//         if (!train) return res.status(404).send("Train not found");
-//         console.log(train)
-//         res.render('admin/trains', { trains: [train],isAdmin: false});
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send("Error fetching train details");
-//     }
-// });
-
-
-
 router.get('/:trainNumber/availability', async (req, res) => {
     try {
         const train = await Train.findOne({ trainNumber: req.params.trainNumber });

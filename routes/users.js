@@ -13,7 +13,6 @@ router.post('/register',async(req,res)=>{
     const u=new User({email,username:newusername,isAdmin:isAdminB});
     const registerUser=await User.register(u,newpassword)
     await registerUser.save();
-    console.log(registerUser);
     res.redirect('/login')
     }
     catch(e){
@@ -26,7 +25,6 @@ router.get('/login',(req,res)=>{
     res.render('users/login')
 })
 router.post('/login',passport.authenticate('local',{ failureFlash: true, failureRedirect: '/login' }),async(req,res)=>{
-    console.log("Done")
     req.flash('success','welcome back');
     res.redirect('/register');
 })

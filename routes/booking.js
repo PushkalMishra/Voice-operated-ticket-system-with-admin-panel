@@ -5,8 +5,6 @@ const {isLoggedIn}=require('../middleware')
 const router=express.Router();
 // POST: Book a ticket
 router.post('/:id/book',isLoggedIn,async (req, res) => {
-    console.log("User ID:", req.user._id); // Debugging to check if user is available
-
     if (!req.user) {
         return res.status(401).json({ error: "Unauthorized. Please log in." });
     }
@@ -28,9 +26,7 @@ router.post('/:id/book',isLoggedIn,async (req, res) => {
         train.availableSeats[seatClass] -= 1;
         await train.save();
         await booking.save();
-        console.log(booking)
-        console.log("booked")
-        // req.flash("success", "Booking confirmed!");
+        req.flash("success", "Booking confirmed!");
         res.redirect('/bookings/history');
     } catch (err) {
         console.error(err);
@@ -40,7 +36,6 @@ router.post('/:id/book',isLoggedIn,async (req, res) => {
 
 // GET: Booking History
 router.get('/history',isLoggedIn, async (req, res) => {
-    console.log("User ID:", req.user._id); 
     try {
         const bookings = await Booking.find({ user: req.user._id }).populate('train');
         console.log(bookings)

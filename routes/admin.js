@@ -15,7 +15,6 @@ router.get('/new',isLoggedIn, (req, res) => {
 
 router.post('/new',isLoggedIn, async (req, res) => {
     try {
-        console.log("Request Body:", req.body);
         const { trainNumber, name, route, sleeper, ac, general, sleeperFare, acFare, generalFare } = req.body;
 
         let parsedRoute;
@@ -35,7 +34,6 @@ router.post('/new',isLoggedIn, async (req, res) => {
         });
 
         const t=await train.save();
-        console.log(t)
         res.redirect('/admin/trains');
     } catch (err) {
         console.error("Error:", err.message);
@@ -49,7 +47,6 @@ router.get('/:id/edit', async (req, res) => {
 
 router.post('/:id/edit', async (req, res) => {
     try {
-        console.log("Request Body:", req.body);
         const { name, route, sleeper, ac, general, sleeperFare, acFare, generalFare,status } = req.body;
         const parsedRoute = JSON.parse(route);
         await Train.findByIdAndUpdate(req.params.id, {
@@ -60,7 +57,7 @@ router.post('/:id/edit', async (req, res) => {
             status
         });
 
-        // req.flash('success', 'Train updated successfully');
+        req.flash('success', 'Train updated successfully');
         res.redirect('/admin/trains');
     } catch (err) {
         console.error(err);
@@ -76,16 +73,6 @@ router.get('/trains',isLoggedIn, async (req, res) => {
         res.status(500).send("Error fetching trains: " + err.message);
     }
 });
-// router.post('/:id/delete', async (req, res) => {
-//     try {
-//         await Train.findByIdAndDelete(req.params.id);
-//         // req.flash('success', 'Train removed successfully');
-//         res.redirect('/admin/trains');
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send("Error deleting train");
-//     }
-// });
 router.delete('/:id', async (req, res) => {
     try {
         await Train.findByIdAndDelete(req.params.id);
