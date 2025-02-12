@@ -3,12 +3,69 @@ function speak(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(utterance);
 }
-    const stationMapping = {
-        'bhopal': 'BHOPAL JN',
-        'indore': 'INDORE JN',
-        'jabalpur': 'JABALPUR',
-        // Add more mappings as needed
-    };
+
+const newtraincommands = {
+    // Fill Train Number
+    'set train number *number': function (number) {
+      document.getElementById('trainNumber').value = number;
+      speak('what is the train name');
+    },
+
+    // Fill Train Name
+    'set train name *name': function (name) {
+      document.getElementById('name').value = name;
+      speak(`Train name set to ${name}`);
+    },
+
+    // Fill Route (JSON format)
+    'set route *route': function (route) {
+      document.getElementById('route').value = route;
+      speak(`Route set to ${route}`);
+    },
+
+    // Fill Sleeper Seats
+    'Number of sleeper seats are *n': function (n) {
+      document.getElementById('sleeper').value = n;
+      speak('Tell me the number of AC seat');
+    },
+
+    // Fill AC Seats
+    'number of AC seats are *s': function (s) {
+      document.getElementById('ac').value = s;
+      speak('Tell me the number of general seat');
+    },
+
+    // Fill General Seats
+    'number of generl seats are *g': function (g) {
+      document.getElementById('general').value = g;
+      speak('Tell me the price of the sleeper seats');
+    },
+
+    // Fill Sleeper Fare
+    'set sleeper fare to *fare': function (fare) {
+      document.getElementById('sleeperFare').value = fare;
+      speak('Tell me the price of the AC seats');
+    },
+
+    // Fill AC Fare
+    'set AC fare to *fare': function (fare) {
+      document.getElementById('acFare').value = fare;
+      speak('Tell me the price of the general seats');
+    },
+
+    // Fill General Fare
+    'set general fare to *fare': function (fare) {
+      document.getElementById('generalFare').value = fare;
+      speak('Submit the form');
+    },
+
+    // Submit the form
+    'submit form': function () {
+      document.getElementById('newtrainform').submit();
+      speak('Form submitted');
+    },
+  };
+
     const navigationcommands = {
         'go to home': () => window.location.href = '/',
         'go to booking': () => window.location.href = '/bookings/history',
@@ -139,6 +196,9 @@ if(annyang){
         else if (path === '/book') {
             annyang.addCommands(bookingCommands);
             speak("What is the starting point?");
+        }
+        else if (path === '/admin/new'){
+            annyang.addCommands(newtraincommands);
         }
         else if (path === '/') {
             annyang.addCommands(searchcommands);
