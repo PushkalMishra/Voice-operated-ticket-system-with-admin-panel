@@ -8,8 +8,9 @@ router.get('/register',(req,res)=>{
 
 router.post('/register',async(req,res)=>{
     try{
-    const {email,newusername,newpassword}=req.body;
-    const u=new User({email,username:newusername});
+    const {email,newusername,newpassword,isAdmin}=req.body;
+    const isAdminB=isAdmin === 'true'
+    const u=new User({email,username:newusername,isAdmin:isAdminB});
     const registerUser=await User.register(u,newpassword)
     await registerUser.save();
     console.log(registerUser);

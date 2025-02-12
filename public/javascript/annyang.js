@@ -11,11 +11,32 @@ function speak(text) {
     };
     const navigationcommands = {
         'go to home': () => window.location.href = '/',
-        'go to booking': () => window.location.href = '/book',
+        'go to booking': () => window.location.href = '/bookings/history',
         'go to login': () => window.location.href = '/login',
         'go to register': () => window.location.href = '/register',
+        'view all train' : ()=>window.location.href='/trains',
         'logout': () => window.location.href = '/logout'
     };
+    const searchcommands={
+        'Starting station is *from':function(from){
+            document.getElementById('from').value=from;
+            console.log("starting is"+from);
+            speak("Tell me the final destination")
+        },
+        'Final station is *to':function(to){
+            document.getElementById('to').value=to;
+            console.log("final is"+to);
+            speak("Search the train")
+        },
+        'Train Number is *t':function(t){
+            document.getElementById('trainNumber').value=t;
+            console.log("Train Number is"+t);
+            speak("Search the train")
+        },
+        'Find the train': function() {
+            document.getElementById('searchform').submit();
+        }
+    }
     const commands = {
         'Login name is *n': function(n) {
             document.getElementById('username').value = n;
@@ -104,27 +125,24 @@ function speak(text) {
             speak('Booking form submitted');
         }
     };
-
 if(annyang){
     window.onload=()=>{
     const path = window.location.pathname;
+    annyang.addCommands(navigationcommands);
         if (path === '/login') {
-            annyang.addCommands(navigationcommands);
             annyang.addCommands(commands);
             speak("What is your login name?");
         } else if (path === '/register') {
-            annyang.addCommands(navigationcommands);
             annyang.addCommands(registercommands);
             speak("What is your username?");
         }
         else if (path === '/book') {
-            annyang.addCommands(navigationcommands);
             annyang.addCommands(bookingCommands);
             speak("What is the starting point?");
         }
         else if (path === '/') {
-            annyang.addCommands(navigationcommands);
-            speak("Tell when u want to start recording");
+            annyang.addCommands(searchcommands);
+            // speak("Tell when u want to start recording");
         }
     annyang.start();
     }

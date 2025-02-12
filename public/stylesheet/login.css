@@ -184,6 +184,11 @@
     margin: 25px auto 0;
     text-align: center;
   }
+  .admin-options {
+    display: flex;
+    gap: 10px; /* Adds spacing between Yes and No */
+    align-items: center;
+}
   label span {
     font-size: 12px;
     color: #cfcfcf;

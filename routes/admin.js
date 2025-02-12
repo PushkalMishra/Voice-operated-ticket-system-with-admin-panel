@@ -1,12 +1,19 @@
 const express = require('express');
 const router=express.Router();
 const Train = require('../models/Train');
-router.get('/new', (req, res) => {
+const { isLoggedIn } = require('../middleware');
+router.get('/new',isLoggedIn, (req, res) => {
+    if(res.locals.isAdmin){
     res.render('admin/newTrain');
+    }
+    else{
+        return res.status(400).send("login as a admin");
+        // req.flash('login as a admin');
+    }
 });
 
 
-router.post('/new', async (req, res) => {
+router.post('/new',isLoggedIn, async (req, res) => {
     try {
         console.log("Request Body:", req.body);
         const { trainNumber, name, route, sleeper, ac, general, sleeperFare, acFare, generalFare } = req.body;
@@ -60,10 +67,10 @@ router.post('/:id/edit', async (req, res) => {
         res.status(500).send("Error updating train");
     }
 });
-router.get('/trains', async (req, res) => {
+router.get('/trains',isLoggedIn, async (req, res) => {
     try {
         const trains = await Train.find({}); // Fetch all trains from the database
-        res.render('admin/trains', { trains ,isAdmin: true}); // Render the trains view
+        res.render('admin/trains', { trains ,isAdmin: res.locals.isAdmin}); // Render the trains view
     } catch (err) {
         console.error("Error fetching trains:", err.message);
         res.status(500).send("Error fetching trains: " + err.message);
